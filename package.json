@@ -1,0 +1,23 @@
+{
+  "name": "agilizei_bootcamp",
+  "version": "1.0.0",
+  "description": "Repositório dedicado para acompanhamento do curso de Cypress do Agilizei",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tiagopelegrini/agilizei_bootcamp.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tiagopelegrini/agilizei_bootcamp/issues"
+  },
+  "homepage": "https://github.com/tiagopelegrini/agilizei_bootcamp#readme",
+  "devDependencies": {
+    "cypress": "^7.6.0"
+  }
+}
