@@ -1,15 +1,19 @@
 /// <reference types="cypress" />
 
+let Chance = require('chance');
+let chance = new Chance();
+
 context('Cadastro', () => {
     it('Cadastro de usuarios no site', () => {
         // baseUrl + register.html
         cy.visit('Register.html');
 
         //type
-        cy.get('input[placeholder="First Name"]').type('Aluno')
-        cy.get('input[ng-model^=Last]').type('Agilizei')
-        cy.get('input[ng-model^=Email]').type('teste@tiago.com')
-        cy.get('input[ng-model^=Phone]').type('1111111111') 
+        // instalar chance(npm install -D chance) para dados aleatorios
+        cy.get('input[placeholder="First Name"]').type(chance.first());
+        cy.get('input[ng-model^=Last]').type(chance.last());
+        cy.get('input[ng-model^=Email]').type(chance.email());
+        cy.get('input[ng-model^=Phone]').type(chance.phone({ formatted: false }));
 
 
         //check -> radio's e checkboxes
@@ -22,14 +26,18 @@ context('Cadastro', () => {
         //select e select2
         cy.get('select#Skills').select('Javascript');
         cy.get('select#countries').select('Argentina');
-        cy.get('select#country').select('Australia',{force: true});
+        cy.get('select#country').select('Australia', { force: true });
         cy.get('select#yearbox').select('1988');
         cy.get('select[ng-model^=month]').select('February');
         cy.get('select#daybox').select('28');
 
         cy.get('input#firstpassword').type('Abc001!');
-        cy.get('input#secondpassword').type('Abc001!');       
+        cy.get('input#secondpassword').type('Abc001!');
 
+        // instalar plugin cypress-file-upload (npm install - D cypress-file-upload) para ter essa ação
+        //incluir import 'cypress-file-upload' em support/index.js
+        cy.get('input#imagesrc').attachFile('teste-foto.png');
+        cy.get('button#submitbtn').click();
     });
 });
 
