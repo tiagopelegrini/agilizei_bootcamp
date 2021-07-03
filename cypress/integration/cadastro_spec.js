@@ -5,6 +5,24 @@ let chance = new Chance();
 
 context('Cadastro', () => {
     it('Cadastro de usuarios no site', () => {
+        //Rotas
+
+        //POST (aborted) /api/1/databases/userdetails/collections/newtable?apiKey=YEX0M2QMPd7JWJw_ipMB3a5gDddt4B_X
+
+        //POST (aborted) /api/1/databases/userdetails/collections/usertable?apiKey=YEX0M2QMPd7JWJw_ipMB3a5gDddt4B_X
+
+        //GET (aborted) /api/1/databases/userdetails/collections/newtable?apiKey=YEX0M2QMPd7JWJw_ipMB3a5gDddt4B_X
+        cy.server()
+        cy.route('POST', '**/api/1/databases/userdetails/collections/newtable?**')
+            .as('postNewtable');//Apelidos
+
+
+        cy.route('POST', '**/api/1/databases/userdetails/collections/usertable?**')
+            .as('postUsertable');
+
+        cy.route('GET', '**/api/1/databases/userdetails/collections/newtable?**')
+            .as('getNewtable');
+
         // baseUrl + register.html
         cy.visit('Register.html');
 
@@ -38,6 +56,12 @@ context('Cadastro', () => {
         //incluir import 'cypress-file-upload' em support/index.js
         cy.get('input#imagesrc').attachFile('teste-foto.png');
         cy.get('button#submitbtn').click();
+
+        cy.wait('@postNewtable').then((resNewtable) => {
+            console.log(resNewtable.status)
+            cy.log(resNewtable.status)
+
+        })
     });
 });
 
